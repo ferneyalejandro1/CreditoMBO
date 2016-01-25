@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CreditoMBO</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="titulo">Gestión del credito</string>
+    <string name="action_settings">Settings</string>
+    <string name="nuevo_credito">Nuevo Credito</string>
+    <string name="buscar">Buscar</string>
+    <string name="ingrese_nombre">Ingrese Nombre</string>
+    <string name="title_activity_form">FormActivity</string>
+</resources>
