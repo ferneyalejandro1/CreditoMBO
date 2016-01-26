@@ -8,4 +8,15 @@
     <string name="buscar">Buscar</string>
     <string name="ingrese_nombre">Ingrese Nombre</string>
     <string name="title_activity_form">FormActivity</string>
+    <string name="nombre">Nombre</string>
+    <string name="cedula">Cedula</string>
+    <string name="direccion">Direccion</string>
+    <string name="telefono">Telefono</string>
+    <string name="celular">Celular</string>
+    <string name="otro">Otro telefono</string>
+    <string name="empresa">Empresa</string>
+    <string name="valor">$ Valor Prestamo</string>
+    <string name="cuotas"># Cuotas</string>
+    <string name="interes">% Interes</string>
+    <string name="guardar">Guardar</string>
 </resources>
