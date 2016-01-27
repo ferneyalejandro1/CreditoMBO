@@ -2,9 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:weightSum="1">
 
-    <TextView
+    <!--TextView
         android:id="@+id/titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,22 +14,14 @@
         android:textSize="24sp"
         android:background="@color/white"
         android:elevation="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:textAlignment="center" />
+        android:layout_marginBottom="10dp" /-->
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout"
-        android:weightSum="1"
-        android:layout_below="@+id/titulo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="47dp">
+        android:layout_marginBottom="10dp">
 
         <EditText
             android:layout_width="0dp"
@@ -41,15 +35,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/buscar"
-            android:id="@+id/buscar" />
+            android:id="@+id/buscar"
+            android:onClick="activity_search"/>
     </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nuevo_credito"
+        android:textSize="20sp"
         android:id="@+id/nuevo_credito"
-        android:onClick="activity_form"
-        android:layout_gravity="center_horizontal" />
+        android:onClick="activity_form" />
 
 </LinearLayout>

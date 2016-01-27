@@ -37,6 +37,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
         android:id="@+id/direccion"
         android:hint="@string/direccion"
         android:layout_below="@+id/cedula"
@@ -87,6 +88,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:id="@+id/empresa"
         android:hint="@string/empresa"
         android:layout_below="@+id/otro"
