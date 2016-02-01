@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
         getWindow().setExitTransition(new Explode());
         Intent intent = new Intent(this, SearchActivity.class);
         EditText editText = (EditText) findViewById(R.id.ingrese_nombre);
-        String msg = editText.getText().toString();
+        String msg = "que pasa pirobo";//editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, msg);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }

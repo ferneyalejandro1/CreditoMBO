@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+
 public class SearchActivity extends AppCompatActivity {
 
     @Override
@@ -22,11 +26,11 @@ public class SearchActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.content, new PlaceholderFragment()).commit();*/
         Intent intent = getIntent();
         String msg = intent.getStringExtra(MenuActivity.EXTRA_MESSAGE);
-        //TextView tv = new TextView(this);
-        //tv.setTextSize(40);
-        //tv.setText(msg);
-        //LinearLayout lay  = (LinearLayout)findViewById(R.id.content);
-        //lay.addView(tv);
+        TextView tv = new TextView(this);
+        tv.setTextSize(40);
+        tv.setText(msg);
+        LinearLayout lay  = (LinearLayout)findViewById(R.id.content);
+        lay.addView(tv);
     }
 
     @Override
