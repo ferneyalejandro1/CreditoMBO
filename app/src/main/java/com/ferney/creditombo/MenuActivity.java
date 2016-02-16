@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.R.*;
 
 public class MenuActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.ferney.creditombo.MESSAGE";
@@ -33,9 +34,9 @@ public class MenuActivity extends AppCompatActivity {
     public void activity_search(View view){
         getWindow().setExitTransition(new Explode());
         Intent intent = new Intent(this, SearchActivity.class);
-        EditText editText = (EditText) findViewById(R.id.ingrese_nombre);
-        String msg = "que pasa pirobo";//editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, msg);
+        //EditText editText = (EditText) findViewById(R.id.ingrese_nombre);
+        //String msg = "que pasa pirobo";//editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, msg);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 

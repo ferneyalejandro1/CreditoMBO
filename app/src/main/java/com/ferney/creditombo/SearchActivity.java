@@ -1,20 +1,21 @@
 package com.ferney.creditombo;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+/**
+ * Actividad principal que contiene un fragmento con una lista.
+ * Recuerda que la nueva librer�a de soporte reemplaz� la clase
+ * {@link android.support.v7.app.ActionBarActivity} por
+ * {@link AppCompatActivity} para el uso de la action bar
+ * en versiones antiguas.
+ */
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -22,15 +23,16 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        /*if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().add(R.id.content, new PlaceholderFragment()).commit();*/
-        Intent intent = getIntent();
+        if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new MainFragment(), "MainFragment").commit();
+        /*Intent intent = getIntent();
         String msg = intent.getStringExtra(MenuActivity.EXTRA_MESSAGE);
         TextView tv = new TextView(this);
         tv.setTextSize(40);
         tv.setText(msg);
-        LinearLayout lay  = (LinearLayout)findViewById(R.id.content);
-        lay.addView(tv);
+        LinearLayout lay  = (LinearLayout)findViewById(R.id.container);
+        lay.addView(tv);*/
+
     }
 
     @Override

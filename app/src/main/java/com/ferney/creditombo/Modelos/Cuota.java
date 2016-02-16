@@ -1,4 +1,4 @@
-package com.ferney.creditombo;
+package com.ferney.creditombo.Modelos;
 
 import java.util.Date;
 

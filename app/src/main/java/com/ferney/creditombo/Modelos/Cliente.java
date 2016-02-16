@@ -1,4 +1,4 @@
-package com.ferney.creditombo;
+package com.ferney.creditombo.Modelos;
 
 /**
  * Created by ferney on 01/28/2016.
