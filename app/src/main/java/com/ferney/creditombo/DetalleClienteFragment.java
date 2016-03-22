@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +43,7 @@ public class DetalleClienteFragment extends Fragment {
     /**
      * Etiqueta de depuración
      */
-    private ImageView cabecera;
-    private TextView nombre, celular;//titulo
+    private TextView nombre, celular;
 
     private ImageButton pagarButton;
     private String extra;
@@ -69,7 +67,6 @@ public class DetalleClienteFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
 
         //obtencion de Views
-        cabecera = (ImageView)v.findViewById(R.id.cabecera);
         nombre = (TextView)v.findViewById(R.id.nombre);
         celular = (TextView)v.findViewById(R.id.celular);
 
@@ -81,7 +78,7 @@ public class DetalleClienteFragment extends Fragment {
                         //Iniciar actividad de actualizacion
                         Intent i = new Intent(getActivity(), UpdateActivity.class);
                         i.putExtra(EXTRA_ID, extra);
-                        getActivity().startActivityForResult(i, Constantes.CODIGO_ACTUALIZACION);
+                        getActivity().startActivityForResult(i, Constantes.CODIGO_DETALLE);
                     }
                 }
         );
@@ -100,7 +97,7 @@ public class DetalleClienteFragment extends Fragment {
      */
     private void cargarDatos() {
         // Añadir parámetro a la URL del web service
-        String newURL = Constantes.GET_BY_ID + "?cedula=" + extra;
+        String newURL = Constantes.GET_CLIENTE_BY_ID + "?cedula=" + extra;
 
         // Realizar la peticion
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(

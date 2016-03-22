@@ -1,6 +1,5 @@
 package com.ferney.creditombo;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +24,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
     Contexto donde actua el recycler view
      */
     private Context context;
+
     public ClienteAdapter(List<Cliente> items, Context context){
         this.context = context;
         this.items = items;
@@ -33,7 +33,8 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
     @Override
     public int getItemCount(){
         return items.size();
-}
+    }
+
     @Override
     public ClienteViewHolder onCreateViewHolder(ViewGroup vg, int i){
         View v = LayoutInflater.from(vg.getContext()).inflate(R.layout.item_list, vg, false);
@@ -44,6 +45,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
     public void onBindViewHolder(ClienteViewHolder viewHolder, int i){
         viewHolder.nombre.setText(items.get(i).getNombre());
         viewHolder.celular.setText(items.get(i).getCelular());
+        viewHolder.empresa.setText(items.get(i).getEmpresa());
     }
 
     /**
@@ -54,37 +56,32 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
      */
     @Override
     public void onItemClick(View view, int position){
-        DetallePrestamoActivity.launch((Activity)context, items.get(position).getCedula());
+        //DetallePrestamoActivity.launch((Activity)context, items.get(position).getCedula());
     }
+
 
     public static class ClienteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Campos respectivos de un item
-        public TextView nombre;
-        public TextView celular;
+        public TextView nombre,celular,empresa;
         public ItemClickListener listener;
 
         public ClienteViewHolder(View view, ItemClickListener listener){
             super(view);
-            nombre = (TextView) view.findViewById(R.id.nombre);
-            celular = (TextView) view.findViewById(R.id.celular);
+            nombre = (TextView)view.findViewById(R.id.nombre);
+            celular = (TextView)view.findViewById(R.id.celular);
+            empresa = (TextView)view.findViewById(R.id.empresa);
             this.listener = listener;
             view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            listener.onItemClick(v, getPosition());  //OnItemClick(v, getAdapterPosition());
+            listener.onItemClick(v, getAdapterPosition());
         }
     }
 
 }
 
 interface ItemClickListener{
-    int getItemCount();
-
-    ClienteAdapter.ClienteViewHolder onCreateViewHolder(ViewGroup vg, int i);
-
-    void onBindViewHolder(ClienteAdapter.ClienteViewHolder viewHolder, int i);
-
     void onItemClick(View view, int position);
 }

@@ -1,13 +1,11 @@
 package com.ferney.creditombo;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * Actividad principal que contiene un fragmento con una lista.
@@ -19,21 +17,40 @@ import android.view.ViewGroup;
 
 public class SearchActivity extends AppCompatActivity {
 
+    ListView listView;
+    ArrayAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().add(R.id.container, new MainFragment(), "MainFragment").commit();
-        /*Intent intent = getIntent();
-        String msg = intent.getStringExtra(MenuActivity.EXTRA_MESSAGE);
-        TextView tv = new TextView(this);
-        tv.setTextSize(40);
-        tv.setText(msg);
-        LinearLayout lay  = (LinearLayout)findViewById(R.id.container);
-        lay.addView(tv);*/
 
+        //Creacion del fragmento principal
+        if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new FragmentFindAll(), "FragmentFindAll").commit();
+
+        /*//obtener instancia de la lista
+        listView = (ListView)findViewById(R.id.listView);
+        //Crear y setear adaptador
+        adapter = new SearchAdapter(this);
+        listView.setAdapter(adapter);*/
     }
+
+    /**
+     * A placeholder fragment containing a simple view.
+
+    public static class PlaceholderFragment extends Fragment {
+
+        public PlaceholderFragment() { }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.activity_search,
+                    container, false);
+            return rootView;
+        }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -48,26 +65,11 @@ public class SearchActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() { }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.activity_search,
-                    container, false);
-            return rootView;
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
+
 }

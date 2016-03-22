@@ -1,27 +1,27 @@
 <?php 
 /**
  * Obtiene el detalle de un cliente especificado por
- * su identificador "cedula"
+ * su nombre
  */
 
 require 'Clientes.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    if (isset($_GET['cedula'])) {
+    if (isset($_GET['nombre'])) {
 
         // Obtener parámetro cedula
-        $parametro = $_GET['cedula'];
+        $parametro = $_GET['nombre'];
 
         // Tratar retorno
-        $retorno = Clientes::getById($parametro);
+        $retorno = Clientes::getByName($parametro);
 
 
         if ($retorno) {
 
             $cliente["estado"] = "1";
             $cliente["cliente"] = $retorno;
-            // Enviar objeto json de la cliente
+            // Enviar objeto json del cliente
             print json_encode($cliente);
         } else {
             // Enviar respuesta de error general
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         print json_encode(
             array(
                 'estado' => '3',
-                'mensaje' => 'Se necesita una cedula'
+                'mensaje' => 'Se necesita un nombre'
             )
         );
     }

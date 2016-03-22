@@ -27,4 +27,9 @@
     <string name="interes">% Interes</string>
     <string name="guardar">Guardar</string>
 
+    <string name="dialogo_si">SI</string>
+    <string name="dialogo_no">NO</string>
+    <string name="dialogo_guardar_msg">¿Esta seguro de guardar estos datos?</string>
+    <string name="dialogo_cancelar_msg">¿Seguro quiere salir sin guardar?</string>
+
 </resources>

@@ -1,7 +1,7 @@
 <?php 
 /**
- * Representa el la estructura de las metas
- * almacenadas en la base de datos
+ * Representa el la estructura de los clientes
+ * almacenados en la base de datos
  */
 require 'Database.php';
 
@@ -59,6 +59,38 @@ class Cliente
             $comando = Database::getInstance()->getDb()->prepare($consulta);
             // Ejecutar sentencia preparada
             $comando->execute(array($cedula));
+            // Capturar primera fila del resultado
+            $row = $comando->fetch(PDO::FETCH_ASSOC);
+            return $row;
+
+        } catch (PDOException $e) {
+            // Aquí puedes clasificar el error dependiendo de la excepción
+            // para presentarlo en la respuesta Json
+            return -1;
+        }
+    }
+
+     /**
+     * Obtiene los campos de un cliente con un nombre
+     * determinado
+     *
+     * @param $nombre Nombre del cliente
+     * @return mixed
+     */
+    public static function getByName($nombre)
+    {
+        // Consulta de la meta
+        $consulta = "SELECT  nombre,
+                             celular,
+                             empresa,
+                             FROM Clientes
+                             WHERE nombre like '%?%'";
+
+        try {
+            // Preparar sentencia
+            $comando = Database::getInstance()->getDb()->prepare($consulta);
+            // Ejecutar sentencia preparada
+            $comando->execute(array($nombre));
             // Capturar primera fila del resultado
             $row = $comando->fetch(PDO::FETCH_ASSOC);
             return $row;

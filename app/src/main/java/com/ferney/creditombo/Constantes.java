@@ -10,33 +10,51 @@ package com.ferney.creditombo;
  */
 public class Constantes {
     /**
-     * Transición Home -> Detalle
+     * Transición Home -> Formulario
      */
-    public static final int CODIGO_DETALLE = 100;
+    public static final int CODIGO_NUEVO = 100;
 
     /**
-     * Transición Detalle -> Actualización
+     * Transición Formulario -> Detalle
      */
-    public static final int CODIGO_ACTUALIZACION = 101;
+    public static final int CODIGO_GUARDAR = 101;
+
+    /**
+     * Transición Home -> Detalle
+     */
+    public static final int CODIGO_DETALLE  = 102;
 
     /**
      * Puerto que utilizas para la conexión.
      * Dejalo en blanco si no has configurado esta carácteristica.
      */
-    private static final String PUERTO_HOST = "";
+    private static final String PUERTO_HOST = ":8080";
 
     /**
      * Dirección IP de genymotion o AVD
      */
-    private static final String IP = "";
+    private static final String IP = "10.0.3.2";
     /**
      * URLs del Web Service
      */
-    public static final String GET = IP + PUERTO_HOST + "/webServices/obtener_clientes.php";
-    public static final String GET_BY_ID = IP + PUERTO_HOST + "/webServices/obtener_detalle.php";
-    public static final String UPDATE = IP + PUERTO_HOST + "/webServices/actualizar_cliente.php";
-    public static final String DELETE = IP + PUERTO_HOST + "/webServices/eliminar_cliente.php";
-    public static final String INSERT = IP + PUERTO_HOST + "/webServices/insertar_cliente.php";
+    public static final String GET_CLIENTES = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_clientes.php";
+    public static final String GET_CLIENTE_BY_ID = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_detalle.php";
+    public static final String GET_CLIENTE_BY_NAME = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_cliente_por_nombre.php";
+    public static final String UPDATE_CLIENTE = "http://" + IP + PUERTO_HOST + "/creditoMBO/actualizar_cliente.php";
+    public static final String DELETE_CLIENTE = "http://" + IP + PUERTO_HOST + "/creditoMBO/eliminar_cliente.php";
+    public static final String INSERT_CLIENTE = "http://" + IP + PUERTO_HOST + "/creditoMBO/insertar_cliente.php";
+
+    public static final String GET_CREDITOS = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_creditos.php";
+    public static final String GET_CREDITO_BY_ID = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_detalle_credito.php";
+    public static final String UPDATE_CREDITO = "http://" + IP + PUERTO_HOST + "/creditoMBO/actualizar_credito.php";
+    public static final String DELETE_CREDITO = "http://" + IP + PUERTO_HOST + "/creditoMBO/eliminar_credito.php";
+    public static final String INSERT_CREDITO = "http://" + IP + PUERTO_HOST + "/creditoMBO/insertar_credito.php";
+
+    public static final String GET_CUOTAS = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_cuotas.php";
+    public static final String GET_CUOTA_BY_ID = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_detalle_cuota.php";
+    public static final String UPDATE_CUOTA = "http://" + IP + PUERTO_HOST + "/creditoMBO/actualizar_cuota.php";
+    public static final String DELETE_CUOTA = "http://" + IP + PUERTO_HOST + "/creditoMBO/eliminar_cuota.php";
+    public static final String INSERT_CUOTA = "http://" + IP + PUERTO_HOST + "/creditoMBO/insertar_cuota.php";
 
     /**
      * Clave para el valor extra que representa al identificador de un cliente

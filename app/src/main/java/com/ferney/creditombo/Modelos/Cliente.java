@@ -4,15 +4,15 @@ package com.ferney.creditombo.Modelos;
  * Created by ferney on 01/28/2016.
  */
 public class Cliente {
-    private String nombre, cedula, direccion, telefono, celular, otro, empresa;
+    private String nombre, cedula, direccion, telefono, celular, otroTel, empresa;
 
-    public Cliente(String nombre, String cedula, String direccion, String telefono, String celular, String otro, String empresa){
-        this.nombre = nombre;
+    public Cliente(String cedula, String nombre, String direccion, String telefono, String celular, String otro, String empresa){
         this.cedula = cedula;
+        this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.celular = celular;
-        this.otro = otro;
+        this.otroTel = otro;
         this.empresa = empresa;
     }
 
@@ -57,11 +57,11 @@ public class Cliente {
     }
 
     public String getOtro() {
-        return otro;
+        return otroTel;
     }
 
     public void setOtro(String otro) {
-        this.otro = otro;
+        this.otroTel = otro;
     }
 
     public String getEmpresa() {
@@ -83,7 +83,7 @@ public class Cliente {
                 this.direccion.compareTo(cliente.direccion) == 0 &&
                 this.celular.compareTo(cliente.celular) == 0 &&
                 this.telefono.compareTo(cliente.telefono) == 0 &&
-                this.otro.compareTo(cliente.otro) == 0 &&
+                this.otroTel.compareTo(cliente.otroTel) == 0 &&
                 this.empresa.compareTo(cliente.empresa) == 0;
     }
 }

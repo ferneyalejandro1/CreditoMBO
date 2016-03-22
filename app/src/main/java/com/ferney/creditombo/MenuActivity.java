@@ -1,16 +1,12 @@
 package com.ferney.creditombo;
 
 import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.R.*;
 
 public class MenuActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.ferney.creditombo.MESSAGE";
@@ -25,19 +21,19 @@ public class MenuActivity extends AppCompatActivity {
 
     @TargetApi(21)
     public void activity_form(View view){
-        getWindow().setExitTransition(new Explode());
+        //getWindow().setExitTransition(new Explode());
         Intent intent = new Intent(this,FormActivity.class);
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        startActivity(intent);//, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     @TargetApi(21)
     public void activity_search(View view){
-        getWindow().setExitTransition(new Explode());
+        //getWindow().setExitTransition(new Explode());
         Intent intent = new Intent(this, SearchActivity.class);
         //EditText editText = (EditText) findViewById(R.id.ingrese_nombre);
         //String msg = "que pasa pirobo";//editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, msg);
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        startActivity(intent);//, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.ferney.creditombo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,9 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ferney.creditombo.Modelos.Cliente;
-
 import com.google.gson.Gson;
-import com.melnykov.fab.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,11 +29,11 @@ import java.util.Arrays;
 /**
  * Fragmento principal que contiene la lista de todos los clientes
  */
-public class MainFragment extends Fragment {
+public class FragmentFindAll extends Fragment {
      /*
     Etiqueta de depuracion
      */
-    private static final String TAG = MainFragment.class.getSimpleName();
+    private static final String TAG = FragmentFindAll.class.getSimpleName();
 
     /*
     Adaptador del recycler view
@@ -57,20 +53,20 @@ public class MainFragment extends Fragment {
     /*
     Instancia global del FAB
      */
-    FloatingActionButton fab;
+    //private FloatingActionButton fab;
 
-    Button button;
+    //private Button button;
     private Gson gson = new Gson();
 
 
-    public MainFragment(){
+    public FragmentFindAll(){
     }
 
-    //@Override
-    public View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        lista = (RecyclerView)view.findViewById(R.id.reciclador);
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        lista = (RecyclerView)v.findViewById(R.id.recycler);
         lista.setHasFixedSize(true);
 
         //Usar un administrador para LinearLayout
@@ -81,18 +77,18 @@ public class MainFragment extends Fragment {
         cargarAdaptador();
 
         //obtener instancia del boton
-        fab = (FloatingActionButton)view.findViewById(R.id.fab);
-        button = (Button)view.findViewById(R.id.nuevo_cliente);
+        //fab = (FloatingActionButton)view.findViewById(R.id.fab);
+        //button = (Button)view.findViewById(R.id.nuevo_cliente);
 
-        //asignar escucha al boton
+        /*/asignar escucha al boton
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //iniciar actividad de insercion
                 getActivity().startActivityForResult(new Intent(getActivity(), FormActivity.class), 3);
             }
-        });
-        return view;
+        });*/
+        return v;
     }
 
     /**
@@ -101,19 +97,27 @@ public class MainFragment extends Fragment {
      */
     public void cargarAdaptador(){
         //peticion GET
-        VolleySingleton.getInstance(getActivity()).
-                addToRequestQueue(new JsonObjectRequest(Request.Method.GET, Constantes.GET, null,new Response.Listener<JSONObject>() {
-                @Override
-                    public void onResponse(JSONObject response){
-                    //procesar la respuesta json
-                    procesarRespuesta(response);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "Error Volley: " + error.getMessage());
-                    }
-                }));
+        VolleySingleton.
+                getInstance(getActivity()).
+                addToRequestQueue(
+                        new JsonObjectRequest(
+                                Request.Method.GET,
+                                Constantes.GET_CLIENTES,
+                                null,
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                        public void onResponse(JSONObject response){
+                                        //procesar la respuesta json
+                                        procesarRespuesta(response);
+                                        }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d(TAG, "Error Volley: " + error.getMessage());
+                                    }
+                                }
+                        )
+                );
     }
 
     /**
