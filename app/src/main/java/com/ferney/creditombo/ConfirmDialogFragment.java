@@ -25,8 +25,8 @@ public class ConfirmDialogFragment extends DialogFragment {
      * huesped para el manejo de los botones del dialogo.
      */
     public interface ConfirmDialogListener {
-        public void onDialogPositiveClick();
-        public void onDialogNegativeClick();
+        void onDialogPositiveClick();
+        void onDialogNegativeClick();
     }
 
     @Override

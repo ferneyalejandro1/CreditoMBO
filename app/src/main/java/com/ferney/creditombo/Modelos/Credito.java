@@ -1,27 +1,20 @@
 package com.ferney.creditombo.Modelos;
 
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
-
 /**
  * Created by ferney on 01/28/2016.
  */
 public class Credito {
-    private int valor, interes, cuotas;
-    private String cedula, numero;
-    private String fecha;
+    private int valor, interes, nroCuotas;
+    private String cedulaCliente, idCredito, fecha;
 
 
-    public Credito(int valor, int interes, int cuotas, String numero, String fecha, String cedula){
+    public Credito(int valor, int interes, int nroCuotas, String idCredito, String fecha, String cedulaCliente){
         this.valor = valor;
         this.interes = interes;
-        this.cuotas = cuotas;
+        this.nroCuotas = nroCuotas;
+        this.idCredito = idCredito;
         this.fecha = fecha;
-        this.cedula = cedula;
-        this.numero = numero;
+        this.cedulaCliente = cedulaCliente;
     }
 
     public int getValor() {
@@ -41,27 +34,27 @@ public class Credito {
     }
 
     public int getCuotas() {
-        return cuotas;
+        return nroCuotas;
     }
 
     public void setCuotas(int cuotas) {
-        this.cuotas = cuotas;
+        this.nroCuotas = cuotas;
     }
 
     public String getCedula() {
-        return cedula;
+        return cedulaCliente;
     }
 
     public void setCedula(String cedula) {
-        this.cedula = cedula;
+        this.cedulaCliente = cedula;
     }
 
     public String getNumero() {
-        return numero;
+        return idCredito;
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        this.idCredito = numero;
     }
 
     public String getFecha() {

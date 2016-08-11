@@ -4,14 +4,12 @@ package com.ferney.creditombo;
  * Created by ferney on 02/15/2016.
  */
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,32 +22,21 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-/**
- * A placeholder fragment containing a simple view.
- */
 
+//Un fragmento placeholder  que contiene una vista simple.
 public class DetalleClienteFragment extends Fragment {
 
-    /*
-    Etiqueta de valor extra
-     */
+    //Etiqueta de valor extra
     private static final String EXTRA_ID = "CEDULA";
 
-    /**
-     * Etiqueta de depuración
-     */
+    //Etiqueta de depuración
     private static final String TAG = DetalleClienteFragment.class.getSimpleName();
 
-    /**
-     * Etiqueta de depuración
-     */
-    private TextView nombre, celular;
-
-    private ImageButton pagarButton;
+    //Instancias de views
+    private TextView nombre, celular, nroCuota, vrCuota;
+    //private ImageButton pagarButton;
     private String extra;
     private Gson gson = new Gson();
-    private Bundle arguments;
-    private String activity;
 
     public DetalleClienteFragment(){
     }
@@ -69,9 +56,11 @@ public class DetalleClienteFragment extends Fragment {
         //obtencion de Views
         nombre = (TextView)v.findViewById(R.id.nombre);
         celular = (TextView)v.findViewById(R.id.celular);
+        nroCuota = (TextView)v.findViewById(R.id.nroCuota);
+        vrCuota = (TextView)v.findViewById(R.id.vrCuota);
 
         //setear escuchas para el fab
-        pagarButton.setOnClickListener(
+        /*pagarButton.setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
@@ -81,7 +70,7 @@ public class DetalleClienteFragment extends Fragment {
                         getActivity().startActivityForResult(i, Constantes.CODIGO_DETALLE);
                     }
                 }
-        );
+        );*/
 
         //obtener Extra del intent de envìo
         extra = getArguments().getString(EXTRA_ID);
@@ -92,9 +81,7 @@ public class DetalleClienteFragment extends Fragment {
         return v;
     }
 
-    /**
-     * Obtiene los datos desde el servidor
-     */
+    //Obtiene los datos desde el servidor
     private void cargarDatos() {
         // Añadir parámetro a la URL del web service
         String newURL = Constantes.GET_CLIENTE_BY_ID + "?cedula=" + extra;
@@ -122,7 +109,6 @@ public class DetalleClienteFragment extends Fragment {
     /**
      * Procesa cada uno de los estados posibles de la
      * respuesta enviada desde el servidor
-     *
      * @param response Objeto Json
      */
     private void procesarRespuesta(JSONObject response) {

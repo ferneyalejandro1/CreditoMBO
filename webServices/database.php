@@ -23,7 +23,7 @@
  			//Crear una nueva conexion PDO
  			self::getDb();
  		} catch (Exception $e) {
- 			print "Error: ".$e->getMessage();."";
+ 			print "Error: ".$e->getMessage();
  		}
  	}
 

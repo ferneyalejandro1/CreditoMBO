@@ -91,10 +91,7 @@ public class FragmentFindAll extends Fragment {
         return v;
     }
 
-    /**
-     * Carga el adaptador con las metas obtenidas
-     * en la respuesta
-     */
+    //Carga el adaptador con los clientes obtenidos en la respuesta
     public void cargarAdaptador(){
         //peticion GET
         VolleySingleton.
@@ -121,9 +118,7 @@ public class FragmentFindAll extends Fragment {
     }
 
     /**
-     * Interpreta los resultados de la respuesta y así
-     * realizar las operaciones correspondientes
-     *
+     * Interpreta los resultados de la respuesta y así realizar las operaciones correspondientes
      * @param response Objeto Json con la respuesta
      */
     private void procesarRespuesta(JSONObject response){

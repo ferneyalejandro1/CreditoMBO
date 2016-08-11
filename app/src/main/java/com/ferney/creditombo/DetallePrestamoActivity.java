@@ -12,19 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-/**
- * Esta actividad contiene un fragmento que muestra el detalle
- * de los clientes // de las cuotas de los prestamos.
- */
+//Esta actividad contiene un fragmento que muestra el detalle de los clientes // de las cuotas de los prestamos.
 public class DetallePrestamoActivity extends AppCompatActivity {
-    /**
-     * Instancia global del cliente a detallar
-     */
+
+    //Instancia global del cliente a detallar
     private String cedula;
 
     /**
      * Inicia una nueva instancia de la actividad
-     *
      * @param activity Contexto desde donde se lanzará
      * @param cedula Identificador del cliente a detallar
      */
@@ -34,9 +29,7 @@ public class DetallePrestamoActivity extends AppCompatActivity {
     }
 
     /**
-     * Construye un Intent a partir del contexto y la actividad
-     * de detalle.
-     *
+     * Construye un Intent a partir del contexto y la actividad de detalle.
      * @param context Contexto donde se inicia
      * @param cedula  Identificador del cliente
      * @return Intent listo para usar

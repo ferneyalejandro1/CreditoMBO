@@ -5,16 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 public class FormActivity extends AppCompatActivity implements ConfirmDialogFragment.ConfirmDialogListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-//      Boton de guardar en la barra de action
-//        if (getSupportActionBar() != null)
-//            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_done);
 
       //Creacion de fragmento de insercion
         if(savedInstanceState == null) {
@@ -28,8 +26,13 @@ public class FormActivity extends AppCompatActivity implements ConfirmDialogFrag
                 getSupportFragmentManager().findFragmentByTag("InsertFragment");
         if (insertFragment != null) {
             if (!insertFragment.camposVacios()){
-                insertFragment.guardarPrestamo(); // Guardando datos
-                finish();//Finalizar actividad
+
+                try {
+                    insertFragment.guardarPrestamo(); // Guardando datos
+                    finish();//Finalizar actividad
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }else
                 Toast.makeText(this,"Completa los campos",Toast.LENGTH_LONG).show();
         }

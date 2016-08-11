@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by win8.1 on 02/24/2016.
+ * Created by ferney on 02/24/2016.
  */
 public class SearchAdapter extends ArrayAdapter {
 

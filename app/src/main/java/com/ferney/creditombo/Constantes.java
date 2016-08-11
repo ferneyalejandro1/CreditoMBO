@@ -51,7 +51,7 @@ public class Constantes {
     public static final String INSERT_CREDITO = "http://" + IP + PUERTO_HOST + "/creditoMBO/insertar_credito.php";
 
     public static final String GET_CUOTAS = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_cuotas.php";
-    public static final String GET_CUOTA_BY_ID = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_detalle_cuota.php";
+    public static final String GET_CUOTAS_BY_CLIENTE = "http://" + IP + PUERTO_HOST + "/creditoMBO/obtener_cuotas_por_cliente.php";
     public static final String UPDATE_CUOTA = "http://" + IP + PUERTO_HOST + "/creditoMBO/actualizar_cuota.php";
     public static final String DELETE_CUOTA = "http://" + IP + PUERTO_HOST + "/creditoMBO/eliminar_cuota.php";
     public static final String INSERT_CUOTA = "http://" + IP + PUERTO_HOST + "/creditoMBO/insertar_cuota.php";

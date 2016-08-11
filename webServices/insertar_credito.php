@@ -1,18 +1,24 @@
-<?php 
+<?php
 /**
- * Insertar un nuevo cliente en la base de datos
+ * Insertar un nuevo credito en la base de datos
  */
 
-require 'Clientes.php';
+require 'Credito.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Decodificando formato Json
     $body = json_decode(file_get_contents("php://input"), true);
-    echo var_dump($body);
 
-    // Insertar cliente
-    $retorno = Clientes::insert($body['cedula'], $body['nombre'], $body['direccion'], $body['telefono'], $body['celular'], $body['otroTel'], $body['empresa']);
+    // Insertar credito
+    $retorno = Credito::insert(
+        $body['valor'],//4
+        $body['interes'],//2
+        $body['nroCuotas'],//3
+        $body['idCredito'],
+        $body['fecha'],//5
+        $body['cedulaCliente']);//6 ff
+
     if ($retorno) {
         // Código de éxito
         print json_encode(
@@ -28,5 +34,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'mensaje' => 'Creación fallida')
         );
     }
-}
-?>
+} ?>

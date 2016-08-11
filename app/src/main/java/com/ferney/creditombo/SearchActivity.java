@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
- * Actividad principal que contiene un fragmento con una lista.
- * Recuerda que la nueva librer�a de soporte reemplaz� la clase
+ * Actividad principal de resultados que contiene un fragmento con una lista.
+ * Recuerda que la nueva librería de soporte reemplazó la clase
  * {@link android.support.v7.app.ActionBarActivity} por
  * {@link AppCompatActivity} para el uso de la action bar
  * en versiones antiguas.

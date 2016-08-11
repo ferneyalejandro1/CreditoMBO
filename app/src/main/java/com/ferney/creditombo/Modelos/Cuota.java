@@ -1,17 +1,14 @@
 package com.ferney.creditombo.Modelos;
 
-import java.util.Date;
-
 /**
  * Created by ferney on 01/28/2016.
  */
 public class Cuota {
-    private int  valor, numero;
-    private String idCredito, idCuota, fecha;
-    private Boolean pendiente;
+    private int  valor, pendiente;
+    private String idCredito, idCuota, fecha, numero;
 
-    public Cuota(String id, int valor, int numero, String idCredito, String fecha, Boolean pendiente){
-        this.idCuota = id;
+    public Cuota(String idCuota, String numero, String fecha, int valor, String idCredito, int pendiente){
+        this.idCuota = idCuota;
         this.valor = valor;
         this.numero = numero;
         this.idCredito = idCredito;
@@ -27,11 +24,11 @@ public class Cuota {
         this.valor = valor;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String  numero) {
         this.numero = numero;
     }
 
@@ -59,11 +56,11 @@ public class Cuota {
         this.fecha = fecha;
     }
 
-    public Boolean getPendiente() {
+    public int getPendiente() {
         return pendiente;
     }
 
-    public void setPendiente(Boolean pendiente) {
+    public void setPendiente(int pendiente) {
         this.pendiente = pendiente;
     }
 }

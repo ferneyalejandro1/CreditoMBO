@@ -19,6 +19,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.ferney.creditombo.Modelos.Cliente;
+import com.ferney.creditombo.Modelos.Credito;
+import com.ferney.creditombo.Modelos.Cuota;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +39,7 @@ import java.util.Map;
  * Fragmento que permite al usuario insertar un nuevo credito
  */
 public class InsertFragment extends Fragment {
+
     /**
      * Etiqueta para depuración */
     private static final String TAG = InsertFragment.class.getSimpleName();
@@ -59,7 +64,7 @@ public class InsertFragment extends Fragment {
         // Inflando layout del fragmento
         View v = inflater.inflate(R.layout.activity_form, container, false);
 
-        // Obtención de instancias controles
+        // Obtención de instancias de los controles
         etNombre = (EditText)v.findViewById(R.id.nombre);
         etCedula = (EditText)v.findViewById(R.id.cedula);
         etDireccion = (EditText)v.findViewById(R.id.direccion);
@@ -85,12 +90,13 @@ public class InsertFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
     /* Si está en modo inserción, entonces crea un nuevo credito en la base de datos */
-    public void guardarPrestamo() {
+    public void guardarPrestamo() throws JSONException {
+        int inReal, inTotal, crTotal, vrCuota, dia, mes, anio, hora, minuto, segundo;
+        String fecha, idCredito ;
 
         // Obtener valores actuales de los controles
-        final String cedula = etCedula.getText().toString();
+        final String cedulaCliente = etCedula.getText().toString();
         final String nombre = etNombre.getText().toString();
         final String direccion = etDireccion.getText().toString();
         final String telefono = etTelefono.getText().toString();
@@ -98,52 +104,10 @@ public class InsertFragment extends Fragment {
         final String otro = etOtro.getText().toString();
         final String empresa = etEmpresa.getText().toString();
 
-        HashMap<String, String> mapCliente = new HashMap<>();// Mapeo previo
-
-        mapCliente.put("cedula", cedula);
-        mapCliente.put("nombre", nombre);
-        mapCliente.put("direccion", direccion);
-        mapCliente.put("telefono", telefono);
-        mapCliente.put("celular", celular);
-        mapCliente.put("otroTel", otro);
-        mapCliente.put("empresa", empresa);
-
-        final String v = etValor.getText().toString();
-        final String in = etInteres.getText().toString();
-        final String c = etCuotas.getText().toString();
-        int valor = Integer.parseInt(v);
-        int interes = Integer.parseInt(in);
-        int cuotas = Integer.parseInt(c);
-
-        Calendar hoy = Calendar.getInstance();
-        int dia = (hoy.get(Calendar.DATE));
-        int mes = hoy.get(Calendar.MONTH);
-        mes = mes + 1;
-        int anio = hoy.get(Calendar.YEAR);
-        String fecha = anio+"-"+mes+"-"+dia;
-        int hora = hoy.get(Calendar.HOUR_OF_DAY);
-        hora = hora - 1;
-        int minuto = hoy.get(Calendar.MINUTE);
-        int segundo = hoy.get(Calendar.SECOND);
-
-        String idCredito = String.valueOf(anio) + String.valueOf(mes) + String.valueOf(dia) + String.valueOf(hora) + String.valueOf(minuto) + String.valueOf(segundo);
-
-        HashMap<String, String> mapCredito = new HashMap<>();// Mapeo previo
-
-        mapCredito.put("nroPrestamo", idCredito);
-        mapCredito.put("monto", v);
-        mapCredito.put("nroCuotas", c);
-        mapCredito.put("interes", in);
-        mapCredito.put("fecha", fecha);
-        mapCredito.put("cedulaCliente", cedula);
-
-        // Crear nuevo objeto Json basado en el mapa
-        JSONObject jobjectCliente = new JSONObject(mapCliente);
-        JSONObject jobjectCredito = new JSONObject(mapCredito);
-
-        // Depurando objeto Json...
-        Log.d(TAG, jobjectCliente.toString());
-        Log.d(TAG, jobjectCredito.toString());
+        Cliente cliente = new Cliente(cedulaCliente, nombre, direccion, telefono, celular, otro, empresa);
+        Gson gson = new Gson();
+        String json = gson.toJson(cliente);
+        JSONObject jobjectCliente = new JSONObject(json);
 
         // Actualizar datos del cliente en el servidor
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(
@@ -164,7 +128,6 @@ public class InsertFragment extends Fragment {
                                 Log.d(TAG, "Error Volley: " + error.getMessage());
                             }
                         }
-
                 ) {
                     @Override
                     public Map<String, String> getHeaders() {
@@ -180,6 +143,38 @@ public class InsertFragment extends Fragment {
                     }
                 }
         );
+
+        final int valor = Integer.parseInt(etValor.getText().toString());
+        final int interes = Integer.parseInt(etInteres.getText().toString());
+        final int nroCuotas = Integer.parseInt(etCuotas.getText().toString());
+
+        //obteniendo fehca y hora del sistema para generar el idCredito y el campo fecha del crédito
+        Calendar hoy = Calendar.getInstance();
+        dia = (hoy.get(Calendar.DATE));
+        mes = hoy.get(Calendar.MONTH);
+        mes = mes + 1;
+        anio = hoy.get(Calendar.YEAR);
+        if(mes < 10) {
+            fecha = anio+"-0"+mes+"-"+dia;
+        }else {
+            fecha = anio+"-"+mes+"-"+dia;
+        }
+        hora = hoy.get(Calendar.HOUR_OF_DAY);
+        hora = hora - 1;
+        minuto = hoy.get(Calendar.MINUTE);
+        segundo = hoy.get(Calendar.SECOND);
+
+        idCredito = String.valueOf(anio) + String.valueOf(mes) + String.valueOf(dia) + String.valueOf(hora) + String.valueOf(minuto) + String.valueOf(segundo);
+
+        Credito prestamo = new Credito(valor, interes, nroCuotas, idCredito, fecha, cedulaCliente);
+
+        gson = new Gson();
+        json = gson.toJson(prestamo);
+
+        // Crear nuevo objeto Json basado en el json
+        JSONObject jobjectCredito = new JSONObject(json);
+        // Depurando objeto Json...
+        Log.d(TAG, jobjectCredito.toString());
 
         // Actualizar datos del credito en el servidor
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(
@@ -200,7 +195,6 @@ public class InsertFragment extends Fragment {
                                 Log.d(TAG, "Error Volley: " + error.getMessage());
                             }
                         }
-
                 ) {
                     @Override
                     public Map<String, String> getHeaders() {
@@ -217,32 +211,25 @@ public class InsertFragment extends Fragment {
                 }
         );
 
-        int inReal = (int) (valor * (interes/100.0f));
-        int inTotal = inReal * (cuotas/2);
-        int crTotal = valor + inTotal;
-        int vc = crTotal / cuotas;
-        String vrCuota = Integer.toString(vc);
+        inReal = (int) (valor * (interes/100.0f));
+        inTotal = (int) (inReal * (nroCuotas/2.0f));
+        crTotal = valor + inTotal;
+        vrCuota = crTotal / nroCuotas;
 
-        for (int i=0; i<cuotas; i++){
-            String next = Integer.toString(i+1);
-            String idCuota = idCredito+next;
+        for (int i=0; i<nroCuotas; i++){
+            String numero = Integer.toString(i+1);
+            String idCuota = idCredito+numero;
             hoy.add(Calendar.DATE, 15);
             dia = hoy.get(Calendar.DATE);
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             String fechaCuota = formato.format(hoy.getTime());
-            String nroCuota = next;
-            String pendiente = "1";
+            int pendiente = 1;
 
-            HashMap<String, String> mapCuota = new HashMap<>();// Mapeo previo
-            mapCuota.put("idCuota", idCuota);
-            mapCuota.put("valor", vrCuota);
-            mapCuota.put("fecha", fechaCuota);
-            mapCuota.put("numero", nroCuota);
-            mapCuota.put("nroPrestamo", idCredito);
-            mapCuota.put("pendiente", pendiente);
+            Cuota cuota = new Cuota(idCuota, numero, fechaCuota, vrCuota, idCredito, pendiente);
+            json = gson.toJson(cuota);
 
-            // Crear nuevo objeto cuota Json basado en el mapa
-            JSONObject jobjectCuota = new JSONObject(mapCuota);
+           // Crear nuevo objeto cuota Json basado en el mapa
+            JSONObject jobjectCuota = new JSONObject(json);
 
             // Depurando objeto Json...
             Log.d(TAG, jobjectCuota.toString());
@@ -266,7 +253,6 @@ public class InsertFragment extends Fragment {
                                     Log.d(TAG, "Error Volley: " + error.getMessage());
                                 }
                             }
-
                     ) {
                         @Override
                         public Map<String, String> getHeaders() {
@@ -307,7 +293,7 @@ public class InsertFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                     // Enviar código de éxito
                     getActivity().setResult(Activity.RESULT_OK);
-                    // Terminar actividad
+                    // Terminar actividad // enviar proximamente a detalle................................................................
                     getActivity().finish();
                     break;
 
@@ -320,7 +306,7 @@ public class InsertFragment extends Fragment {
                     // Enviar código de falla
                     getActivity().setResult(Activity.RESULT_CANCELED);
                     // Terminar actividad
-                    getActivity().finish();
+                    //getActivity().finish();
                     break;
             }
         } catch (JSONException e) {

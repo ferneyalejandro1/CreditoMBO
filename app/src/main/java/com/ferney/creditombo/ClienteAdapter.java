@@ -1,5 +1,6 @@
 package com.ferney.creditombo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,14 +16,11 @@ import java.util.List;
  * Created by ferney on 02/11/2016.
  */
 public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteViewHolder> implements ItemClickListener{
-    /**
-     * Lista de objetos {@link Cliente} que representan la fuente de datos
-     * de inflado
-     */
+
+    //Lista de objetos {@link Cliente} que representan la fuente de datos de inflado
     private List<Cliente> items;
-    /*
-    Contexto donde actua el recycler view
-     */
+
+    //Contexto donde actua el recycler view
     private Context context;
 
     public ClienteAdapter(List<Cliente> items, Context context){
@@ -50,13 +48,12 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClienteV
 
     /**
      * Sobrescritura del método de la interfaz {@link ItemClickListener}
-     *
      * @param view     item actual
      * @param position posición del item actual
      */
     @Override
     public void onItemClick(View view, int position){
-        //DetallePrestamoActivity.launch((Activity)context, items.get(position).getCedula());
+        DetallePrestamoActivity.launch((Activity)context, items.get(position).getCedula());
     }
 
 

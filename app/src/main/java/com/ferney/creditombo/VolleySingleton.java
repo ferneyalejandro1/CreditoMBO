@@ -7,8 +7,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 /**
- * Creado por Hermosa Programación.
- *
  * Clase que representa un cliente HTTP Volley
  */
 

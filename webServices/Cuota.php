@@ -5,7 +5,7 @@
  */
 require 'Database.php';
 
-class Clientes
+class Cuota
 {
 	
 	function __construct()
@@ -13,14 +13,14 @@ class Clientes
 	}
 
 	/**
-     * Retorna en la fila especificada de la tabla 'clientes'
+     * Retorna en la fila especificada de la tabla 'cuotas'
      *
-     * @param $cedula Identificador del registro
+     * @param $idCuota Identificador del registro
      * @return array Datos del registro
      */
     public static function getAll()
     {
-        $consulta = "SELECT * FROM clientes";
+        $consulta = "SELECT * FROM cuotas";
         try {
             // Preparar sentencia
             $comando = Database::getInstance()->getDb()->prepare($consulta);
@@ -35,30 +35,28 @@ class Clientes
     }
 
      /**
-     * Obtiene los campos de un cliente con un identificador
+     * Obtiene los campos de una cuota con un identificador
      * determinado
      *
-     * @param $cedula Identificador del cliente
+     * @param $idCuota Identificador de la cuota
      * @return mixed
      */
-    public static function getById($cedula)
+    public static function getById($idCuota)
     {
         // Consulta de la meta
-        $consulta = "SELECT cedula,
-                            nombre,
-                             direccion,
-                             telefono,
-                             celular,
-                             otro,
-                             empresa,
-                             FROM Clientes
-                             WHERE cedula = ?";
+        $consulta = "SELECT nroPrestamo,
+                            numero,
+                            fecha,
+                            valor,
+                            pendiente
+                            FROM cuotas
+                            WHERE idCuota = ?";
 
         try {
             // Preparar sentencia
             $comando = Database::getInstance()->getDb()->prepare($consulta);
             // Ejecutar sentencia preparada
-            $comando->execute(array($cedula));
+            $comando->execute(array($idCuota));
             // Capturar primera fila del resultado
             $row = $comando->fetch(PDO::FETCH_ASSOC);
             return $row;
@@ -71,20 +69,19 @@ class Clientes
     }
 
      /**
-     * Obtiene los campos de un cliente con un nombre
+     * Obtiene los campos fecha y valor de las cuotas de un prestamo
      * determinado
      *
-     * @param $nombre Nombre del cliente
+     * @param $nroPrestamo credito deseado
      * @return mixed
      */
-    public static function getByName($nombre)
+    public static function getByPrestamo($nroPrestamo)
     {
         // Consulta de la meta
-        $consulta = "SELECT  nombre,
-                             celular,
-                             empresa,
-                             FROM Clientes
-                             WHERE nombre like '%?%'";
+        $consulta = "SELECT  fecha,
+                             valor
+                             FROM cuotas
+                             WHERE nroPrestamo like '?'";
 
         try {
             // Preparar sentencia
@@ -106,71 +103,87 @@ class Clientes
      * Actualiza un registro de la bases de datos basado
      * en los nuevos valores relacionados con un identificador
      *
-     * @param $cedula      identificador
-     * @param $nombre      nuevo nombre
-     * @param $direccion   nueva direccion
-     * @param $telefono    nueva telefono
-     * @param $celular     nueva celular
-     * @param $otro        nueva otro telefono
-     * @param $empresa     nueva empresa
+     * @param $idCuota      identificador
+     * @param $numero      	nuevo numero
+     * @param $fecha 	   	nueva fecha
+     * @param $valor 	   	nueva valor
+     * @param $idCredito   	nueva idCredito
+     * @param $pendiente    nueva pendiente
      */
     public static function update(
-        $cedula,
-        $nombre,
-        $direccion,
-        $telefono,
-        $celular,
-        $otro,
-        $empresa
+        $idCuota,
+        $numero,
+        $fecha,
+        $valor,
+        $idCredito,
+        $pendiente
     )
     {
         // Creando consulta UPDATE
-        $consulta = "UPDATE Clientes" .
-            " SET nombre=?, direccion=?, telefono=?, celular=?, otro=?, empresa=? " .
-            "WHERE cedula=?";
+        $consulta = "UPDATE cuotas" .
+            " SET idCuota=?, numero=?, fecha=?, valor=?, idCredito=?, pendiente=? " .
+            "WHERE idCuota=?";
 
         // Preparar la sentencia
         $cmd = Database::getInstance()->getDb()->prepare($consulta);
 
         // Relacionar y ejecutar la sentencia
-        $cmd->execute(array($nombre, $direccion, $telefono, $celular, $otro, $empresa, $cedula));
+        $cmd->execute(array($idCuota, $numero, $fecha, $valor, $idCredito, $pendiente));
 
         return $cmd;
     }
 
-
     /**
-     * Insertar un nuevo cliente
-     * @param $nombre           nombre del nuevo registro
-     * @param $direccion        direccion del nuevo registro
-     * @param $telefono  	    telefono del nuevo registro
-     * @param $celular   	    celular del nuevo registro
-     * @param $otro   		    otro telefono del nuevo registro
-     * @param $empresa   		empresa del nuevo registro
+     * Insertar una nueva cuota
+     *
+     * @param $idCuota      identificador
+     * @param $numero      	nuevo numero
+     * @param $fecha 	   	nueva fecha
+     * @param $valor 	   	nueva valor
+     * @param $idCredito   	nueva idCredito
+     * @param $pendiente    nueva pendiente
      * @return PDOStatement
      */
-    public static function insert($cedula, $nombre, $direccion, $telefono, $celular, $otro, $empresa){
+    public static function insert(
+    	$idCuota,
+        $numero,
+        $fecha,
+        $valor,
+        $idCredito,
+        $pendiente){
         // Sentencia INSERT
-        $comando = "INSERT INTO clientes (cedula, nombre, direccion, telefono, celular, otroTel, empresa) VALUES(?,?,?,?,?,?,?)";
+        $comando = "INSERT INTO cuotas ( idCuota, numero, fecha, valor, idCredito, pendiente) VALUES( ?,?,?,?,?,?)";
         // Preparar la sentencia
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
 
-        return $sentencia->execute(array($cedula, $nombre, $direccion, $telefono, $celular, $otro, $empresa));
-    }
+        return $sentencia->execute(
+            array(
+            	$idCuota,
+                $numero,
+                $fecha,
+                $valor,
+                $idCredito,
+                $pendiente
+            )
+        );
 
+    }
 
     /**
      * Eliminar el registro con el identificador especificado
-     * @param $cedula identificador del cliente
+     *
+     * @param $idCuota identificador del cliente
      * @return bool Respuesta de la eliminación
      */
-    public static function delete($cedula){
+    public static function delete($idCuota)
+    {
         // Sentencia DELETE
-        $comando = "DELETE FROM Clientes WHERE cedula=?";
+        $comando = "DELETE FROM cuotas WHERE idCuota = ?";
+
         // Preparar la sentencia
         $sentencia = Database::getInstance()->getDb()->prepare($comando);
 
         return $sentencia->execute(array($cedula));
     }
 }
-?>
+ ?>

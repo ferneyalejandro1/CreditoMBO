@@ -24,6 +24,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             android:text="@string/buscar"
             android:id="@+id/buscar"
             android:onClick="activity_search"/>
@@ -32,7 +33,11 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:drawableStart="@drawable/nuevo"
+        android:drawableLeft="@drawable/nuevo"
         android:text="@string/nuevo_credito"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:id="@+id/nuevo_credito"
         android:onClick="activity_form" />

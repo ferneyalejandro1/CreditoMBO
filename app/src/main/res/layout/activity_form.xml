@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
+        android:maxLength="50"
         android:hint="@string/nombre"
         android:ems="10"
         android:id="@+id/nombre" />
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="10"
         android:id="@+id/cedula"
         android:hint="@string/cedula" />
 
@@ -27,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPostalAddress"
+        android:maxLength="50"
         android:id="@+id/direccion"
         android:hint="@string/direccion" />
 
@@ -34,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
+        android:maxLength="10"
         android:id="@+id/telefono"
         android:hint="@string/telefono" />
 
@@ -41,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
+        android:maxLength="10"
         android:id="@+id/celular"
         android:hint="@string/celular" />
 
@@ -48,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
+        android:maxLength="10"
         android:id="@+id/otro"
         android:hint="@string/otro" />
 
@@ -55,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:maxLength="50"
         android:id="@+id/empresa"
         android:hint="@string/empresa" />
 
@@ -62,39 +69,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="8"
         android:id="@+id/valor"
-        android:hint="@string/valor" />
+        android:hint="@string/valor"
+        android:layout_marginRight="150dp"
+        android:layout_marginEnd="150dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:ems="10"
         android:id="@+id/cuotas"
         android:hint="@string/cuotas"
-        android:layout_below="@+id/valor"
-        android:layout_alignRight="@+id/valor"
-        android:layout_alignEnd="@+id/valor"
-        android:layout_marginRight="197dp"
-        android:layout_marginEnd="197dp" />
+        android:layout_marginRight="150dp"
+        android:layout_marginEnd="150dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/interes"
-        android:hint="@string/interes"
-        android:layout_below="@+id/cuotas"
-        android:layout_alignRight="@+id/cuotas"
-        android:layout_alignEnd="@+id/cuotas"
-        android:layout_marginRight="197dp"
-        android:layout_marginEnd="197dp" />
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:id="@+id/interes"
+        android:hint="@string/interes"
+        android:layout_marginRight="150dp"
+        android:layout_marginEnd="150dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:drawableLeft="@drawable/guardar"
+        android:drawableStart="@drawable/guardar"
+        android:drawablePadding="8dp"
         android:text="@string/guardar"
-        android:id="@+id/guardar" />
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:id="@+id/guardar"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
